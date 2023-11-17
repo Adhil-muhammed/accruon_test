@@ -61,8 +61,16 @@ export const useCreateForm = () => {
     });
   };
 
+  const removeRow = (index) => {
+    setSelectedForm((draft) => {
+      draft.splice(index, 1);
+      return draft;
+    });
+  };
+
   return {
     selectedForm,
+    removeRow,
     addFormField,
     handleDropdown,
     handleFormField,

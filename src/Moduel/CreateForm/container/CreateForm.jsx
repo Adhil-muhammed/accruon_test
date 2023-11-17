@@ -6,8 +6,13 @@ import { Link, useNavigate } from "react-router-dom";
 
 export const CreateForm = () => {
   const navigate = useNavigate();
-  const { selectedForm, handleFormField, addFormField, handleDropdown } =
-    useCreateForm();
+  const {
+    selectedForm,
+    removeRow,
+    addFormField,
+    handleDropdown,
+    handleFormField,
+  } = useCreateForm();
 
   const TypesOfField = [
     { label: "text" },
@@ -79,21 +84,19 @@ export const CreateForm = () => {
                 sx={{ width: "200px", pl: 1 }}
                 onChange={(e) => handleFormField(e, index)}
               />
-              <Stack></Stack>
+              <Button
+                variant="outlined"
+                color="error"
+                sx={{ p: 2 }}
+                onClick={() => removeRow(index)}
+              >
+                delete
+              </Button>
             </Stack>
           );
         })}
       </Stack>
-      <Stack paddingTop={"12px"}>
-        {/* <Button
-          variant="contained"
-          className="btn"
-          sx={{ width: 500 }}
-          onClick={() => addFormField()}
-        >
-          add
-        </Button> */}
-      </Stack>
+      <Stack paddingTop={"12px"}></Stack>
     </Stack>
   );
 };
