@@ -14,6 +14,13 @@ export const CreateForm = () => {
     handleFormField,
   } = useCreateForm();
 
+  const filteredForm = selectedForm?.filter(
+    (form) => form?.label !== "" && form.tyep !== ""
+  );
+
+  const isFormcreate = filteredForm?.length;
+  console.log("selectedForm: ", selectedForm);
+
   const TypesOfField = [
     { label: "text" },
     { label: "mail" },
@@ -25,23 +32,37 @@ export const CreateForm = () => {
   return (
     <Stack height={"100vh"} justifyContent={"center"} alignItems={"center"}>
       <Stack width={"700px"} display={"flex"}>
-        <Stack
-          direction={"row"}
-          sx={{ flexFlow: "" }}
-          justifyContent={"space-between"}
-        >
-          <Button
-            variant="contained"
-            className="btn"
-            sx={{ width: 200 }}
-            onClick={() => addFormField()}
+        {!isFormcreate ? (
+          <>
+            <h2>please craete a form</h2>
+            <Button
+              variant="contained"
+              className="btn"
+              sx={{ width: 200 }}
+              onClick={() => addFormField()}
+            >
+              add
+            </Button>
+          </>
+        ) : (
+          <Stack
+            direction={"row"}
+            sx={{ flexFlow: "" }}
+            justifyContent={"space-between"}
           >
-            add
-          </Button>
-          <Button variant="contained" onClick={() => navigate("/preview")}>
-            preView
-          </Button>
-        </Stack>
+            <Button
+              variant="contained"
+              className="btn"
+              sx={{ width: 200 }}
+              onClick={() => addFormField()}
+            >
+              add
+            </Button>
+            <Button variant="contained" onClick={() => navigate("/preview")}>
+              preView
+            </Button>
+          </Stack>
+        )}
 
         {selectedForm?.map((form, index) => {
           return (
