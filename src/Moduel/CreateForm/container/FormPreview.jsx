@@ -41,6 +41,7 @@ export const FormPreview = () => {
                     <>
                       <input
                         type={form?.type}
+                        name={form?.name}
                         onChange={handleFormPreview}
                         className={
                           form?.type === "checkbox"
