@@ -1,0 +1,16 @@
+.preview-input {
+  padding: 12px;
+  border-radius: 7px;
+  outline: none;
+  border: 1px solid blue;
+}
+
+.form-label {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.formType-checkbox {
+  width: 20px;
+  padding: 12px;
+}

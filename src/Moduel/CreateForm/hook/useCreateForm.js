@@ -5,6 +5,7 @@ const initState = [
   {
     type: "",
     label: "",
+    name: "",
   },
 ];
 
@@ -14,26 +15,28 @@ export const useCreateForm = () => {
   const [selectedForm, setSelectedForm] = useImmer(
     localFormData ? JSON?.parse(localFormData) : initState
   );
+
+  const [formPreview, setFormPreview] = useImmer({});
+  console.log("formPreview: ", formPreview);
   console.log("selectedForm: ", selectedForm);
 
   useEffect(() => {
     localStorage?.setItem("selectedForm", JSON?.stringify(selectedForm));
   }, [selectedForm]);
 
-  const handleFormField = (e, index, form) => {
+  const handleFormField = (e, index) => {
     const { value, name } = e.target;
-    if (form === "select") {
-      setSelectedForm((draft) => {
-        draft[index][name] = value;
-        return draft;
-      });
-    }
-    if (form === "input") {
-      setSelectedForm((draft) => {
-        draft[index][name] = value;
-        return draft;
-      });
-    }
+    setSelectedForm((draft) => {
+      draft[index][name] = value;
+      return draft;
+    });
+  };
+
+  const handleDropdown = (value, index, from) => {
+    setSelectedForm((draft) => {
+      draft[index].type = value?.label;
+      return draft;
+    });
   };
 
   const addFormField = (index) => {
@@ -52,5 +55,18 @@ export const useCreateForm = () => {
     }
   };
 
-  return { handleFormField, addFormField, selectedForm };
+  const handleFormPreview = (e) => {
+    const { name, value } = e.target;
+    setFormPreview((draft) => {
+      draft[name] = value;
+    });
+  };
+
+  return {
+    selectedForm,
+    addFormField,
+    handleDropdown,
+    handleFormField,
+    handleFormPreview,
+  };
 };
