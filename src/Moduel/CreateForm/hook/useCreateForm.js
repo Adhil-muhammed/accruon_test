@@ -18,7 +18,6 @@ export const useCreateForm = () => {
 
   const [formPreview, setFormPreview] = useImmer({});
   console.log("formPreview: ", formPreview);
-  console.log("selectedForm: ", selectedForm);
 
   useEffect(() => {
     localStorage?.setItem("selectedForm", JSON?.stringify(selectedForm));
